@@ -147,4 +147,4 @@ hashTable.set("god", "Zeus");
 console.log(hashTable.get("dog"));
 console.log(hashTable.get("god"));
 //worst case of operations with the data - O(n) - depending on the count of collisions. Better hash function = less collisions = less complexity
-//average case - O(1) if we choose the right hash function
+//average case - O(1) if we choose the right algorithm for the hash function
