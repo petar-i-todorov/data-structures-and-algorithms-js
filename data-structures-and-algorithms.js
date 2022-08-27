@@ -88,31 +88,30 @@ function quickSort(arr) {
   return [...quickSort(left), pivot, ...quickSort(right)];
 }
 
-//Hash Tables
-function hashStringToInt(s, tableSize) {
-  let hash = 17;
+//hash tables
+const _hash = (key, tableSize) => {
+  let hash = 15;
 
-  for (let i = 0; i < s.length; i++) {
-    hash = (13 * hash * s.charCodeAt(i)) % tableSize;
+  for (let i = 0; i < key.length; i++) {
+    hash = (hash * 19 * key.charCodeAt(i)) % tableSize;
   }
-
   return hash;
-}
+};
 
 class HashTable {
-  table = new Array(3333);
-  numItems = 0;
+  table = new Array(2003);
+  itemsCount = 0;
 
-  resize = () => {
+  _resize = () => {
     const newTable = new Array(this.table.length * 2);
-    this.table.forEach((item) => {
-      if (item) {
-        item.forEach(([key, value]) => {
-          const idx = hashStringToInt(key, newTable.length);
-          if (newTable[idx]) {
-            newTable[idx].push([key, value]);
+    this.table.forEach((place) => {
+      if (place) {
+        place.forEach((pair) => {
+          const idx = _hash(pair[0], newTable.length);
+          if (!newTable[idx]) {
+            newTable[idx] = [pair];
           } else {
-            newTable[idx] = [[key, value]];
+            newTable[idx].push(pair);
           }
         });
       }
@@ -120,30 +119,32 @@ class HashTable {
     this.table = newTable;
   };
 
-  setItem = (key, value) => {
-    this.numItems++;
-    const loadFactor = this.numItems / this.table.length;
-    if (loadFactor > 0.8) {
-      // resize
-      this.resize();
+  set = (key, value) => {
+    this.itemsCount++;
+    const loadFactor = this.itemsCount / this.table.length;
+    if (loadFactor >= 0.8) {
+      this._resize();
     }
-
-    const idx = hashStringToInt(key, this.table.length);
-    if (this.table[idx]) {
-      this.table[idx].push([key, value]);
-    } else {
+    const idx = _hash(key, this.table.length);
+    if (!this.table[idx]) {
       this.table[idx] = [[key, value]];
+    } else {
+      this.table[idx].push([key, value]);
     }
   };
-
-  getItem = (key) => {
-    const idx = hashStringToInt(key, this.table.length);
-
+  get = (key) => {
+    const idx = _hash(key, this.table.length);
     if (!this.table[idx]) {
       return null;
     }
-
-    // O(n)
-    return this.table[idx].find((x) => x[0] === key)[1];
+    return this.table[idx].find((pair) => pair[0] === key)[1];
   };
 }
+
+const hashTable = new HashTable();
+hashTable.set("dog", "Cody");
+hashTable.set("god", "Zeus");
+console.log(hashTable.get("dog"));
+console.log(hashTable.get("god"));
+//worst case of operations with the data - O(n) - depending on the count of collisions. Better hash function = less collisions = less complexity
+//average case - O(1) if we choose the right hash function
