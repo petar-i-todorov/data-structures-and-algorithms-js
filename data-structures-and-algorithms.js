@@ -89,7 +89,7 @@ function quickSort(arr) {
 }
 
 //hash tables
-const _hash = (key, tableSize) => {
+const hashFunction = (key, tableSize) => {
   let hash = 15;
 
   for (let i = 0; i < key.length; i++) {
@@ -107,7 +107,7 @@ class HashTable {
     this.table.forEach((place) => {
       if (place) {
         place.forEach((pair) => {
-          const idx = _hash(pair[0], newTable.length);
+          const idx = hashFunction(pair[0], newTable.length);
           if (!newTable[idx]) {
             newTable[idx] = [pair];
           } else {
@@ -133,7 +133,7 @@ class HashTable {
     }
   };
   get = (key) => {
-    const idx = _hash(key, this.table.length);
+    const idx = hashFunction(key, this.table.length);
     if (!this.table[idx]) {
       return null;
     }
