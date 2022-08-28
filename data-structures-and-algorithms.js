@@ -207,7 +207,7 @@ function breadthFirstSearch(rootKey, table, searchedValue) {
     console.log("queue after shifting: " + queue);
   }
 
-  // didn't find a value in the tree
+  // didn't find a value in the graph
   return null;
 }
 console.log(breadthFirstSearch("id", hashTable.table, "cn"));
