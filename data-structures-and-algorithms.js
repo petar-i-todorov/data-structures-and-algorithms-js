@@ -181,6 +181,7 @@ graph.set("my", "kh");
 graph.set("kh", "cn");
 function breadthFirstSearch(rootKey, table, searchVal) {
   const queue = [rootKey];
+  const visited = [];
 
   while (queue.length > 0) {
     if (queue[0] === searchVal) {
@@ -192,10 +193,15 @@ function breadthFirstSearch(rootKey, table, searchVal) {
       //if condition because not all countries are included as indexes. For example ph in this case is a value of a key but it's not a key itself and it's not reserving an index in the array for itself
       table[idx]
         .filter((pair) => pair[0] === queue[0])
-        .forEach((pair) => queue.push(pair[1]));
+        .forEach((pair) => {
+          if (!visited.find(pair[1])) {
+            queue.push(pair[1]);
+          }
+        });
     }
 
     // remove element that we just searched
+    visited.unshift();
     queue.shift();
     console.log("queue after shifting: " + queue);
   }
