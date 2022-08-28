@@ -211,3 +211,4 @@ function breadthFirstSearch(rootKey, table, searchedValue) {
   return null;
 }
 console.log(breadthFirstSearch("id", hashTable.table, "cn"));
+//complexity - between O(1) and O(V + E)
