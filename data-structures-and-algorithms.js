@@ -213,7 +213,7 @@
 // console.log(breadthFirstSearch("id", hashTable.table, "cn"));
 //complexity - between O(1) and O(V + E)
 
-// //Graphs. Dijkstra's algorithm --------------------------------------------------------------------------------------------------------
+//Graphs. Dijkstra's algorithm --------------------------------------------------------------------------------------------------------
 const graph = {};
 graph.a = { b: 2, c: 1 };
 graph.b = { f: 7 };
@@ -227,42 +227,44 @@ const findLowestCostNode = (costs, processed) => {
   let lowestCost = Infinity;
   let lowestCostNode;
   Object.keys(costs).forEach((node) => {
-    let cost = costs[node];
-    if (cost < lowestCost && !processed.includes(node)) {
-      lowestCost = cost;
-      lowestCostNode = node;
+    if (!processed.includes(node)) {
+      if (costs[node] < lowestCost) {
+        lowestCost = costs[node];
+        lowestCostNode = node;
+      }
     }
   });
   return lowestCostNode;
 };
 
-const shortestPath = (graph, startNode) => {
+const shortestPath = (startNode, graph) => {
   const costs = {};
   const processed = [];
-  let neighbors = {};
   Object.keys(graph).forEach((node) => {
     if (node !== startNode) {
-      console.log(node);
-      let nodeWeight = graph[startNode][node];
-      costs[node] = nodeWeight || Infinity;
+      costs[node] = graph[startNode][node] || Infinity;
     }
   });
-  let lowestCostNode = findLowestCostNode(costs, processed);
-  while (lowestCostNode) {
-    const cost = costs[lowestCostNode];
-    neighbors = graph[lowestCostNode];
-    Object.keys(neighbors).forEach((neighbor) => {
-      let newCost = cost + neighbors[neighbor];
-      if (newCost < costs[neighbor]) {
-        costs[neighbor] = newCost;
-      }
-    });
+  processed.push(startNode);
+  while (processed.length <= Object.keys(graph).length) {
+    const lowestCostNode = findLowestCostNode(costs, processed);
+    const neighbors = graph[lowestCostNode];
+    console.log(neighbors);
+    if (neighbors) {
+      Object.keys(neighbors).forEach((node) => {
+        if (!processed.includes(node)) {
+          const newCost = costs[lowestCostNode] + graph[lowestCostNode][node];
+          if (newCost < costs[node]) {
+            costs[node] = newCost;
+          }
+        }
+      });
+    } else {
+      return costs;
+    }
     processed.push(lowestCostNode);
-    lowestCostNode = findLowestCostNode(costs, processed);
   }
   return costs;
 };
-
-console.log(shortestPath(graph, "a", "g"));
-
-//complexity - O(V^2)
+console.log(shortestPath("a", graph));
+// //complexity - O(V^2)
