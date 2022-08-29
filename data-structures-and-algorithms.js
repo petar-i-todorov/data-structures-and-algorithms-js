@@ -1,4 +1,4 @@
-// //binary search - O(log n)
+// //binary search - O(log n) -----------------------------------------------------------------------------------------------------------
 // const binarySearch = (array, searchedElement) => {
 //   let start = 0;
 //   let end = array.length - 1;
@@ -11,7 +11,7 @@
 //   return false;
 // };
 
-// //selection sort - O(n^2)
+// //selection sort - O(n^2) ----------------------------------------------------------------------------------------------------------
 // const selectionSort = (array) => {
 //   const arrayToReturn = [];
 //   while (array.length) {
@@ -27,7 +27,7 @@
 //   return arrayToReturn;
 // };
 
-// //Euclid algorithm for finding GCD of 2 numbers (without recursion)
+// //Euclid's algorithm for finding GCD of 2 numbers (without recursion) -----------------------------------------------------------------------
 // const GCD = (num1, num2) => {
 //   while (num1 !== num2) {
 //     let max = num1 > num2 ? num1 : num2;
@@ -58,7 +58,7 @@
 //   return gcd(b, a % b);
 // }
 
-// //Quicksort - worst case - O(n^2), average case - O(n*log n) - depending on the pivot
+// //Quicksort - worst case - O(n^2), average case - O(n*log n) - depending on the pivot --------------------------------------------------------
 // function quickSort(arr) {
 //   let pivot;
 //   if (arr.length < 2) {
@@ -88,7 +88,7 @@
 //   return [...quickSort(left), pivot, ...quickSort(right)];
 // }
 
-// //hash tables
+// //hash tables -----------------------------------------------------------------------------------------------------------------------------
 // const hashFunction = (key, tableSize) => {
 //   let hash = 15;
 
@@ -149,7 +149,7 @@
 //worst case of operations with the data - O(n) - depending on the count of collisions. Better hash function = less collisions = less complexity
 //average case - O(1) if we choose the right algorithm for the hash function
 
-//Graphs. Breadth-first search
+//Graphs. Breadth-first search ----------------------------------------------------------------------------------------------------------------
 
 // const hashFunction = (key, tableSize) => {
 //   let hash = 15;
@@ -213,7 +213,7 @@
 // console.log(breadthFirstSearch("id", hashTable.table, "cn"));
 //complexity - between O(1) and O(V + E)
 
-// //Graphs. Dijkstra's algorithm
+// //Graphs. Dijkstra's algorithm --------------------------------------------------------------------------------------------------------
 //   const graph = {};
 //   graph.a = { b: 2, c: 1 };
 //   graph.b = { f: 7 };
