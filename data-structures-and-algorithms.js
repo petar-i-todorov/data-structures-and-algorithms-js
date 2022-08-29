@@ -249,7 +249,6 @@ const shortestPath = (startNode, graph) => {
   while (processed.length <= Object.keys(graph).length) {
     const lowestCostNode = findLowestCostNode(costs, processed);
     const neighbors = graph[lowestCostNode];
-    console.log(neighbors);
     if (neighbors) {
       Object.keys(neighbors).forEach((node) => {
         if (!processed.includes(node)) {
@@ -259,8 +258,6 @@ const shortestPath = (startNode, graph) => {
           }
         }
       });
-    } else {
-      return costs;
     }
     processed.push(lowestCostNode);
   }
