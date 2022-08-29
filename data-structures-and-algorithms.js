@@ -151,64 +151,118 @@
 
 //Graphs. Breadth-first search
 
-const hashFunction = (key, tableSize) => {
-  let hash = 15;
-  for (let i = 0; i < key.length; i++) {
-    hash = (13 * hash * key.charCodeAt(i)) % tableSize;
-  }
-  return hash;
-};
+// const hashFunction = (key, tableSize) => {
+//   let hash = 15;
+//   for (let i = 0; i < key.length; i++) {
+//     hash = (13 * hash * key.charCodeAt(i)) % tableSize;
+//   }
+//   return hash;
+// };
 
-class HashTable {
-  table = new Array(3000);
-  set = (key, value) => {
-    const idx = hashFunction(key, this.table.length);
-    if (!this.table[idx]) {
-      this.table[idx] = [[key, value]];
-    } else {
-      this.table[idx].push([key, value]);
-    }
-  };
-  get = (key) => {
-    const idx = hashFunction(key, this.table.length);
-    return this.table[idx].find((el) => el[0] === key)[1];
-  };
-}
-const hashTable = new HashTable(); // = graph
-hashTable.set("id", "sg");
-hashTable.set("id", "ph");
-hashTable.set("id", "my");
-hashTable.set("my", "kh");
-hashTable.set("my", "sg");
-hashTable.set("kh", "cn");
-function breadthFirstSearch(rootKey, table, searchedValue) {
-  const queue = [rootKey];
-  const visited = [];
+// class HashTable {
+//   table = new Array(3000);
+//   set = (key, value) => {
+//     const idx = hashFunction(key, this.table.length);
+//     if (!this.table[idx]) {
+//       this.table[idx] = [[key, value]];
+//     } else {
+//       this.table[idx].push([key, value]);
+//     }
+//   };
+//   get = (key) => {
+//     const idx = hashFunction(key, this.table.length);
+//     return this.table[idx].find((el) => el[0] === key)[1];
+//   };
+// }
+// const hashTable = new HashTable(); // = graph
+// hashTable.set("id", "sg");
+// hashTable.set("id", "ph");
+// hashTable.set("id", "my");
+// hashTable.set("my", "kh");
+// hashTable.set("my", "sg");
+// hashTable.set("kh", "cn");
+// function breadthFirstSearch(rootKey, table, searchedValue) {
+//   const queue = [rootKey];
+//   const visited = [];
 
-  while (queue.length > 0) {
-    if (queue[0] === searchedValue) {
-      return queue[0];
-    }
-    const idx = hashFunction(queue[0], table.length);
-    // add all child nodes to queue
-    if (table[idx]) {
-      //if condition because not all countries are included as indexes. For example ph in this case is a value of a key but it's not a key itself and it's not reserving an index in the array for itself
-      table[idx]
-        .filter((pair) => pair[0] === queue[0])
-        .forEach((pair) => {
-          if (!visited.find((country) => country === pair[1])) {
-            queue.push(pair[1]);
-          }
-        });
-    }
+//   while (queue.length > 0) {
+//     if (queue[0] === searchedValue) {
+//       return queue[0];
+//     }
+//     const idx = hashFunction(queue[0], table.length);
+//     // add all child nodes to queue
+//     if (table[idx]) {
+//       //if condition because not all countries are included as indexes. For example ph in this case is a value of a key but it's not a key itself and it's not reserving an index in the array for itself
+//       table[idx]
+//         .filter((pair) => pair[0] === queue[0])
+//         .forEach((pair) => {
+//           if (!visited.find((country) => country === pair[1])) {
+//             queue.push(pair[1]);
+//           }
+//         });
+//     }
 
-    // remove element that we just searched
-    visited.unshift(queue.shift());
-    console.log("queue after shifting: " + queue);
-  }
+//     // remove element that we just searched
+//     visited.unshift(queue.shift());
+//     console.log("queue after shifting: " + queue);
+//   }
 
-  // didn't find a value in the graph
-  return null;
-}
-console.log(breadthFirstSearch("id", hashTable.table, "cn"));
+//   // didn't find a value in the graph
+//   return null;
+// }
+// console.log(breadthFirstSearch("id", hashTable.table, "cn"));
 //complexity - between O(1) and O(V + E)
+
+// //Graphs. Dijkstra's algorithm
+//   const graph = {};
+//   graph.a = { b: 2, c: 1 };
+//   graph.b = { f: 7 };
+//   graph.c = { d: 5, e: 2 };
+//   graph.d = { f: 2 };
+//   graph.e = { f: 1 };
+//   graph.f = { g: 1 };
+//   graph.g = {};
+
+//   const findLowestCostNode = (costs, processed) => {
+//     let lowestCost = Infinity;
+//     let lowestCostNode;
+//     Object.keys(costs).forEach((node) => {
+//       let cost = costs[node];
+//       if (cost < lowestCost && !processed.includes(node)) {
+//         lowestCostNode = node;
+//         lowestCost = cost;
+//       }
+//     });
+//     return lowestCostNode;
+//   };
+
+//   const shortestPath = (graph, start) => {
+//     const costs = {};
+//     const processed = [];
+//     let neighbors = {};
+//     Object.keys(graph).forEach((node) => {
+//       if (node !== start) {
+//         console.log(node);
+//         let value = graph[start][node];
+//         costs[node] = value || Infinity;
+//       }
+//     });
+//     let node = findLowestCostNode(costs, processed);
+//     while (node) {
+//       const cost = costs[node];
+//       neighbors = graph[node];
+//       Object.keys(neighbors).forEach((neighbor) => {
+//         let newCost = cost + neighbors[neighbor];
+//         if (newCost < costs[neighbor]) {
+//           costs[neighbor] = newCost;
+//         }
+//       });
+//       processed.push(node);
+//       node = findLowestCostNode(costs, processed);
+//     }
+//     return costs;
+//   };
+
+//   console.log(shortestPath(graph, "a", "g"));
+
+//   //complexity - O(V^2)
