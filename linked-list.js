@@ -45,3 +45,4 @@ linkedList.add(5);
 linkedList.add(7);
 linkedList.print();
 console.log(linkedList.getSize());
+//operations complexity - O(n)
