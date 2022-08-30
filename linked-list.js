@@ -89,6 +89,6 @@ linkedList.insertBefore(100, 7);
 linkedList.print();
 console.log(linkedList.length);
 //operations complexity
-//insert/remove element - O(1)
+//insert/remove element - O(const)
 //traverse all elements - O(n)
 //access i-th element - O(n)
