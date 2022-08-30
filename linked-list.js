@@ -45,14 +45,14 @@ class LinkedList {
     this.length++;
   }
 
-  insertBefore(value, beforeValue) {
+  insertBefore(toInsertValue, toInsertBeforeValue) {
     if (this.head.value) {
       let currentNode = this.head;
-      while (currentNode.next.value !== beforeValue) {
+      while (currentNode.next.value !== toInsertBeforeValue) {
         currentNode = currentNode.next;
       }
       const beforeValueNode = currentNode.next;
-      currentNode.next = new Node(value);
+      currentNode.next = new Node(toInsertValue);
       currentNode.next.next = beforeValueNode;
       this.length++;
     }
