@@ -28,6 +28,20 @@ class BinarySearchTree {
       }
     }
   }
+  find(value) {
+    let currentNode = this.root;
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return true;
+      }
+      if (value < currentNode.value) {
+        currentNode = currentNode.leftNode;
+      } else if (value > currentNode.value) {
+        currentNode = currentNode.rightNode;
+      }
+    }
+    return false;
+  }
 }
 
 class Node {
@@ -46,6 +60,8 @@ binarySearchTree.insert(9);
 binarySearchTree.insert(0);
 binarySearchTree.insert(10);
 console.log(binarySearchTree.nodesValues);
+console.log(binarySearchTree.find(10));
+console.log(binarySearchTree.find(100));
 
 //complexity
 //average case (insert, delete, search) - O(log n)
