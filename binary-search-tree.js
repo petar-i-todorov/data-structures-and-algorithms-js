@@ -48,5 +48,5 @@ binarySearchTree.insert(10);
 console.log(binarySearchTree.nodesValues);
 
 //complexity
-//average case (insert, delete, find) - O(log n)
+//average case (insert, delete, search) - O(log n)
 //worst case - O(n) if the whole binary tree represents a straight line of only ascending/descending values
